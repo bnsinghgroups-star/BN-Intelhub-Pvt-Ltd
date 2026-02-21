@@ -427,44 +427,65 @@ export const COURSES = [
   }
 ];
 
+
+
 export const SERVICES = [
   {
     id: 1,
-    title: "Website Development",
-    description: "Responsive, high-performance websites tailored to your brand identity.",
+    title: "Web Development",
+    description: "Custom, responsive, and SEO-friendly websites tailored to your brand.",
     icon: <Globe />
   },
   {
     id: 2,
-    title: "Web Application Development",
-    description: "Scalable and secure web apps built with modern frameworks.",
-    icon: <AppWindow />
+    title: "Mobile App Development",
+    description: "Native and cross-platform mobile applications for iOS and Android.",
+    icon: <Smartphone />
   },
   {
     id: 3,
-    title: "AI-Based Solutions",
-    description: "Intelligent automation and predictive analytics for your business.",
-    icon: <Sparkles />
+    title: "Software Development",
+    description: "Scalable and robust software solutions for enterprise needs.",
+    icon: <Code />
   },
   {
     id: 4,
-    title: "School and College Management Systems",
-    description: "Comprehensive ERP systems for educational institutions.",
-    icon: <School />
+    title: "AI & Automation Solutions",
+    description: "Intelligent automation and predictive analytics to streamline operations.",
+    icon: <Cpu />
   },
   {
     id: 5,
-    title: "Business Automation Software",
-    description: "Streamline operations with custom automation tools.",
-    icon: <Settings />
+    title: "Graphic Designing",
+    description: "Creative visual designs that communicate your brand message effectively.",
+    icon: <PenTool />
   },
   {
     id: 6,
-    title: "Custom Software Development",
-    description: "Tailor-made software solutions to solve unique business challenges.",
-    icon: <Terminal />
+    title: "Video Production & Editing",
+    description: "High-quality video content creation and professional editing services.",
+    icon: <Sparkles />
+  },
+  {
+    id: 7,
+    title: "Digital Marketing",
+    description: "Strategic marketing solutions to boost your online presence and growth.",
+    icon: <TrendingUp />
+  },
+  {
+    id: 8,
+    title: "Cloud & IT Support",
+    description: "Reliable cloud infrastructure management and technical support.",
+    icon: <Cloud />
+  },
+  {
+    id: 9,
+    title: "Training & Development",
+    description: "Corporate training and skill development programs for teams.",
+    icon: <GraduationCap />
   }
 ];
+
 
 export const WHY_CHOOSE_US = [
   {

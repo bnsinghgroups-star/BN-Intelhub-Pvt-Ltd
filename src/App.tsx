@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import CoursesPage from './pages/CoursesPage';
 import About from './pages/About';
+import ServicesPage from './pages/ServicesPage';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<CoursesPage />} />
             <Route path="/about" element={<About />} />
+             <Route path="/services" element={<ServicesPage />} />
           </Routes>
         </main>
         <Footer />
