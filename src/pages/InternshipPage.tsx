@@ -218,8 +218,8 @@ export default function InternshipPage() {
                           {program.icon}
                         </div>
                         <div>
-                          <h3 className="text-2xl font-extrabold text-blue-700 mb-1">{program.title}</h3>
-                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md inline-block">
+                          <h3 className="text-xl font-bold text-slate-900">{program.title}</h3>
+                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md mt-1 inline-block">
                             {program.duration}
                           </span>
                         </div>
@@ -263,8 +263,8 @@ export default function InternshipPage() {
                           {program.icon}
                         </div>
                         <div>
-                          <h3 className="text-2xl font-extrabold text-pink-700 mb-1">{program.title}</h3>
-                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md inline-block">
+                          <h3 className="text-xl font-bold text-slate-900">{program.title}</h3>
+                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md mt-1 inline-block">
                             {program.duration}
                           </span>
                         </div>
