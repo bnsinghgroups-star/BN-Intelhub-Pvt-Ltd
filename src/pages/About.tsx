@@ -4,8 +4,10 @@ import { SectionWrapper, Container } from '../components/ui/Layout';
 import { Badge } from '../components/ui/Badge';
 import { PrimaryButton } from '../components/ui/Buttons';
 import { Card } from '../components/ui/Cards';
+import { useNavigate } from 'react-router-dom';
 
 export default function About() {
+  const navigate = useNavigate();
   const services = [
     { icon: <Globe />, title: "Web Development", description: "Custom, responsive, and SEO-friendly websites." },
     { icon: <Smartphone />, title: "Mobile App Dev", description: "Native and cross-platform mobile applications." },
@@ -23,52 +25,54 @@ export default function About() {
       name: "ADARSH SINGH",
       role: "Director & Strategic Marketing Manager",
       bio: "Visionary leader with expertise in strategic marketing and business growth. Drives brand positioning, partnerships, and long-term expansion strategy.",
-      image: "https://picsum.photos/seed/adarsh/400/400"
+      image: "/male.png"
     },
     {
       name: "MOHAN PRAKASH",
       role: "Research & Training Head",
       bio: "Specialist in research-driven insights and professional training programs. Ensures knowledge development and industry-aligned skill enhancement.",
-      image: "https://picsum.photos/seed/mohan/400/400"
+      image: "/direct3.png"
     },
     {
       name: "GULSHAN KUMAR",
       role: "Technical Lead – AI & Full Stack Developer",
       bio: "Leads AI solutions and full-stack development projects. Expert in scalable architectures, modern web technologies, and intelligent systems.",
-      image: "https://picsum.photos/seed/gulshan/400/400"
-    },
-    {
-      name: "PRITI KUMARI",
-      role: "Full Stack Developer",
-      bio: "Passionate developer focused on creating seamless front-end and back-end experiences with modern frameworks and clean code practices.",
-      image: "https://picsum.photos/seed/priti/400/400"
-    },
-    
-    {
-      name: "MD AWESH",
-      role: "Full Stack Developer",
-      bio: "Dedicated developer specializing in responsive UI design and robust backend integration. Focused on performance-driven applications.",
-      image: "https://picsum.photos/seed/awesh/400/400"
-    },
-
-    {
-      name: "ROHIT SINGH",
-      role: "Database Administrator",
-      bio: "Responsible for database architecture, performance optimization, and secure data management ensuring high system reliability.",
-      image: "https://picsum.photos/seed/rohit/400/400"
+      image: "/male.png"
     },
    
     {
       name: "SURRENDER RAVI DAS",
       role: "Counsellor",
       bio: "Provides career guidance and professional mentorship, helping individuals make informed decisions and achieve growth.",
-      image: "https://picsum.photos/seed/surrender/400/400"
+      image: "/counseller.png"
     },
     {
       name: "VIJAY KUMAR",
       role: "Business Development Manager",
       bio: "Drives client acquisition, partnerships, and revenue growth strategies to expand business opportunities and market presence.",
-      image: "https://picsum.photos/seed/vijay/400/400"
+      image: "male.png"
+    }
+    
+    ,
+    {
+      name: "PRITI KUMARI",
+      role: "Full Stack Developer",
+      bio: "Passionate developer focused on creating seamless front-end and back-end experiences with modern frameworks and clean code practices.",
+      image: "/girl.png"
+    },
+    
+    {
+      name: "MD AWESH",
+      role: "Full Stack Developer",
+      bio: "Dedicated developer specializing in responsive UI design and robust backend integration. Focused on performance-driven applications.",
+      image: "/male.png"
+    },
+
+    {
+      name: "ROHIT SINGH",
+      role: "Database Administrator",
+      bio: "Responsible for database architecture, performance optimization, and secure data management ensuring high system reliability.",
+      image: "male.png"
     }
   ];
 
@@ -148,7 +152,7 @@ export default function About() {
               <div className="relative">
                 <div className="absolute -inset-4 bg-blue-100 rounded-2xl transform rotate-3" />
                 <img 
-                  src="https://picsum.photos/seed/office-meeting/800/600" 
+                  src="/company.png" 
                   alt="Team Meeting" 
                   className="relative rounded-2xl shadow-xl w-full h-auto object-cover"
                   referrerPolicy="no-referrer"
@@ -334,7 +338,7 @@ export default function About() {
             </p>
             <PrimaryButton 
               className="px-8 py-4 text-lg bg-indigo-600 text-white hover:bg-indigo-700 border-none shadow-lg shadow-indigo-200"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => navigate('/internships')}
             >
               Get in Touch <ArrowRight className="ml-2" />
             </PrimaryButton>

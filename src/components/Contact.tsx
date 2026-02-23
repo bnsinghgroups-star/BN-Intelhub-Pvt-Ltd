@@ -1,16 +1,52 @@
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { SectionWrapper, Container } from './ui/Layout';
-import { PrimaryButton } from './ui/Buttons';
 import { Badge } from './ui/Badge';
 
 export default function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [interest, setInterest] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Temporary redirect to Google Form
-    // Replace with your actual Google Form URL
-    window.open('https://docs.google.com/forms/d/e/1FAIpQLSe8TkNJMPCqCWKUFWVt3XZqS-cgkJWj5i3qeYwMw_ZSSnrzmg/viewform', '_blank');
+
+    const formData = new FormData();
+
+    // ✅ Correct Entry IDs
+    formData.append("entry.1404571374", fullName);
+    formData.append("entry.1855901574", email);
+    formData.append("entry.471054464", phone);
+    formData.append("entry.1645794894", interest);
+    formData.append("entry.899394948", message);
+
+    try {
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSfmELFPb5ieG-EdmNil6i_vo_soSvjBtyFf0Q_RmvesEm9xgw/formResponse",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: formData,
+        }
+      );
+
+      alert("Application Submitted Successfully!");
+
+      // Reset form
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setInterest("");
+      setMessage("");
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("There was an error submitting your application. Please try again.");
+    }
   };
+
   return (
     <SectionWrapper id="contact" background="light">
       <Container>
@@ -31,7 +67,7 @@ export default function Contact() {
               Have questions about our courses or internships? Fill out the form and our team will get back to you within 24 hours.
             </p>
 
-         <div className="space-y-8">
+            <div className="space-y-8">
 
   {/* Email */}
   <div className="flex items-start gap-4">
@@ -40,11 +76,20 @@ export default function Contact() {
     </div>
     <div>
       <h4 className="text-lg font-bold text-slate-900 mb-1">Email Us</h4>
+
       <a
         href="mailto:bnintelhub@gmail.com"
         className="text-slate-600 hover:text-blue-600 transition"
       >
         bnintelhub@gmail.com
+      </a>
+      <br />
+
+      <a
+        href="mailto:bnintelhub.services@gmail.com"
+        className="text-slate-600 hover:text-blue-600 transition"
+      >
+        bnintelhub.services@gmail.com
       </a>
     </div>
   </div>
@@ -56,6 +101,7 @@ export default function Contact() {
     </div>
     <div>
       <h4 className="text-lg font-bold text-slate-900 mb-1">Call Us</h4>
+
       <a
         href="tel:+918936078905"
         className="text-slate-600 hover:text-blue-600 transition"
@@ -72,8 +118,9 @@ export default function Contact() {
     </div>
     <div>
       <h4 className="text-lg font-bold text-slate-900 mb-1">Visit Us</h4>
+
       <a
-        href="https://www.google.com/maps/search/?api=1&query=STPI+Plot-8+Part+Namkum+Industrial+Area+Namkum+Ranchi+834010"
+        href="https://www.google.com/maps/search/?api=1&query=STPI+Plot-8+Part+Namkum+Industrial+Area+Ranchi+834010"
         target="_blank"
         rel="noopener noreferrer"
         className="text-slate-600 hover:text-blue-600 transition"
@@ -94,86 +141,76 @@ export default function Contact() {
             viewport={{ once: true }}
             className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100"
           >
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">Enrollment Form</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">
+              BN Intelhub – Enrollment Application Form
+            </h3>
+
+            <p className="text-slate-500 mb-6 text-sm">
+              Please complete this form to apply for our programs. Our team will contact you shortly.
+            </p>
+
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-slate-700 mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-slate-50 focus:bg-white"
-                  placeholder="John Doe"
-                />
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-slate-50 focus:bg-white"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-slate-50 focus:bg-white"
-                    placeholder="+91 98765 43210"
-                  />
-                </div>
-              </div>
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Full Name"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200"
+              />
 
-              <div>
-                <label htmlFor="course" className="block text-sm font-medium text-slate-700 mb-2">
-                  Course Interested In
-                </label>
-                <select
-                  id="course"
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-slate-50 focus:bg-white appearance-none"
-                >
-                  <option value="">Select a course</option>
-                  <option value="full-stack">Full Stack Development</option>
-                  <option value="mern">MERN Stack Development</option>
-                  <option value="ai-ml">AI & Machine Learning</option>
-                  <option value="data-science">Data Science</option>
-                  <option value="internship">Industry Internship Program</option>
-                </select>
-              </div>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200"
+              />
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
-                  Message (Optional)
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all bg-slate-50 focus:bg-white resize-none"
-                  placeholder="Tell us about your background and goals..."
-                ></textarea>
-              </div>
+              <input
+                type="tel"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone Number"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200"
+              />
 
-              <PrimaryButton type="submit" className="w-full justify-center py-4 text-lg shadow-lg shadow-blue-500/20 group">
+              <select
+                required
+                value={interest}
+                onChange={(e) => setInterest(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200"
+              >
+                <option value="">Select Interest</option>
+                <option value="Software Development Services">
+                  Software Development Services
+                </option>
+                <option value="Professional Training Courses">
+                  Professional Training Courses
+                </option>
+                <option value="Internship Programs">
+                  Internship Programs
+                </option>
+              </select>
+
+              <textarea
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tell us about your background and goals..."
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 resize-none"
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold transition-all"
+              >
                 Submit Application
-                <Send size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </PrimaryButton>
-              
-              <p className="text-center text-xs text-slate-500 mt-4">
-                By submitting this form, you agree to our Terms of Service and Privacy Policy.
-              </p>
+              </button>
+
             </form>
           </motion.div>
         </div>

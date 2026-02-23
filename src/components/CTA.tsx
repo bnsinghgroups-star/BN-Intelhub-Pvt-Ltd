@@ -1,8 +1,12 @@
 import { motion } from 'motion/react';
 import { PrimaryButton, SecondaryButton } from './ui/Buttons';
 import { SectionWrapper } from './ui/Layout';
+import { useNavigate } from 'react-router-dom';
 
 export default function CTA() {
+
+  const navigate = useNavigate();
+
   return (
     <SectionWrapper className="px-4">
       <div className="max-w-5xl mx-auto">
@@ -24,9 +28,16 @@ export default function CTA() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <PrimaryButton className="w-full sm:w-auto bg-white text-blue-700 hover:bg-blue-50 border-none">
+              <PrimaryButton
+                onClick={() => {
+                  navigate('/internships');
+                  window.scrollTo(0, 0);
+                }}
+                className="w-full sm:w-auto bg-white text-blue-700 hover:bg-blue-50 border-none"
+              >
                 Get Started Now
               </PrimaryButton>
+
               <SecondaryButton className="w-full sm:w-auto bg-transparent text-white border-white/30 hover:bg-white/10 hover:border-white/50">
                 Download Brochure
               </SecondaryButton>

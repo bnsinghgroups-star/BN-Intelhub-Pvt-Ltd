@@ -49,7 +49,7 @@ export default function Navbar() {
     { name: 'Home', to: '/', icon: <Home size={20} /> },
     { name: 'Programs', to: '/courses', icon: <BookOpen size={20} /> },
     { name: 'Internship', to: '/internships', icon: <Briefcase size={20} /> },
-    { name: 'Development Services', to: '/services', icon: <Code size={20} /> },
+     { name: 'Development Services', to: '/services', icon: <Code size={20} /> },
     { name: 'About Us', to: '/about', icon: <Users size={20} /> },
   ];
 

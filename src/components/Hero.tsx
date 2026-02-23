@@ -1,332 +1,253 @@
-import { motion } from 'motion/react';
-import { CheckCircle, Code, Smartphone, Database, Shield, Cpu, Server, Wifi, Layers, User, FileText, Clock, Smile, Briefcase, GraduationCap, Users, Monitor, Megaphone, Settings, BarChart, TrendingUp, UserCheck } from 'lucide-react';
-import { SectionWrapper, Container } from '../components/ui/Layout';
-import { Badge } from '../components/ui/Badge';
-import { Card } from '../components/ui/Cards';
-import Internships from '../components/Internships';
+import { motion, AnimatePresence } from 'motion/react';
+import { CheckCircle2, ChevronDown } from 'lucide-react';
+import { Container } from './ui/Layout';
+import { useState, useEffect } from 'react';
 
-export default function InternshipPage() {
-  const techPrograms = [
-    {
-      title: "Web Development",
-      icon: <Code className="w-6 h-6" />,
-      duration: "3-4 Months",
-      tools: {
-        "Frontend": "HTML, CSS, JS, React, Vue.js, Angular",
-        "Backend": "Node.js, Express.js, Python, Java, Php Etc",
-        "Database": "SQL, NoSQL",
-        "DevOps": "Hosting, Github, Docker"
-      },
-      color: "blue"
-    },
-    {
-      title: "Android Development",
-      icon: <Smartphone className="w-6 h-6" />,
-      duration: "3-4 Months",
-      tools: {
-        "Frontend": "React Native, Flutter, Java Android",
-        "Backend": "Node.js, Express.js, Python, Java, Php Etc",
-        "Database": "SQL, NoSQL",
-        "DevOps": "Hosting, Github, Docker"
-      },
-      color: "green"
-    },
-    {
-      title: "Data Science",
-      icon: <Database className="w-6 h-6" />,
-      duration: "5-6 Months",
-      tools: {
-        "Core": "Python / R, Data Handling, Visualization, EDA",
-        "Advanced": "ML, Deep Learning, Cloud(Big Data), SQL, Math, Stats",
-        "Deployment": "Flask / FastAPI",
-        "Specializations": "NLP, Computer Vision, Time Series"
-      },
-      color: "purple"
-    },
-    {
-      title: "Cyber Security",
-      icon: <Shield className="w-6 h-6" />,
-      duration: "5-6 Months",
-      tools: {
-        "Basics": "Networking & OS, Security fundamentals (CIA, encryption)",
-        "Web": "Web & network security (OWASP Top 10), System hardening",
-        "Advanced": "Ethical hacking tools & pentesting, Cloud & advanced security",
-        "Practices": "MFA, Secure coding, Backup & disaster recovery"
-      },
-      color: "red"
-    },
-    {
-      title: "Robotics",
-      icon: <Cpu className="w-6 h-6" />,
-      duration: "9 Months",
-      tools: {
-        "Core": "Math & Physics, Electronics & Microcontrollers, Programming (Python/C++)",
-        "Hardware": "Motors & Sensors, PID & Control Systems",
-        "Advanced": "ROS & Simulation, CAD & Mechanical Design, Vision & AI, Autonomous Robots"
-      },
-      color: "orange"
-    },
-    {
-      title: "Big Data",
-      icon: <Server className="w-6 h-6" />,
-      duration: "3-4 Months",
-      tools: {
-        "Basics": "Big Data basics, Python/Java/Scala, SQL & NoSQL",
-        "Frameworks": "Hadoop (HDFS, MapReduce), Spark, Kafka",
-        "Tools": "Airflow / ETL, Cloud Big Data tools, Analytics & visualization"
-      },
-      color: "indigo"
-    },
-    {
-      title: "IOT",
-      icon: <Wifi className="w-6 h-6" />,
-      duration: "5-6 Months",
-      tools: {
-        "Basics": "IoT basics, Microcontrollers (Arduino / ESP32 / Raspberry Pi)",
-        "Hardware": "Sensors & Actuators, C / Python / MicroPython",
-        "Network": "Networking, Cloud & dashboards, Security",
-        "Advanced": "Edge AI, IIoT, Smart automation"
-      },
-      color: "cyan"
-    },
-    {
-      title: "Full-Stack AI",
-      icon: <Layers className="w-6 h-6" />,
-      duration: "9 Months",
-      tools: {
-        "Core": "ML, DL, NLP, CV, RL, Generative AI, Robotics",
-        "Applications": "Industry Applications, Emerging AI...etc"
-      },
-      color: "pink"
+const courses = [
+  "Full Stack Developer",
+  "Data Science",
+  "Cyber Security",
+  "Robotics",
+  "Big Data",
+  "IoT",
+  "AI & ML",
+  "Digital Marketing"
+];
+
+export default function Hero() {
+  const [index, setIndex] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gradYear, setGradYear] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [mobile, setMobile] = useState("");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % courses.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    // ✅ Correct Google Form Entry IDs
+    formData.append("entry.1345355600", name); // TODO: Add correct Name ID
+    formData.append("entry.335730671", email);
+    formData.append("entry.994511878", gradYear);
+    formData.append("entry.11620289", jobTitle); // ✅ Correct Job Title
+    formData.append("entry.1963209061", mobile);
+
+    try {
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSfbERB8_CBmQ_2PrZUxgWJXD-Yf4YU9ZIydWLuhsOynL8dRVg/formResponse",
+        {
+          method: "POST",
+          mode: "no-cors",
+          body: formData,
+        }
+      );
+
+      alert("Form Submitted Successfully!");
+
+      // Reset form
+      setName("");
+      setEmail("");
+      setGradYear("");
+      setJobTitle("");
+      setMobile("");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error submitting the form. Please try again.");
     }
-  ];
-
-  const managementPrograms = [
-    {
-      title: "Basic IT & Computer Skills",
-      icon: <Monitor className="w-6 h-6" />,
-      duration: "2-3 Months",
-      tools: {
-        "Office Tools": "MS Office (Excel, Word, PowerPoint)",
-        "Collaboration": "Google Workspace",
-        "Communication": "Email professionalism"
-      },
-      color: "blue"
-    },
-    {
-      title: "Digital Marketing",
-      icon: <Megaphone className="w-6 h-6" />,
-      duration: "3-4 Months",
-      tools: {
-        "Social Media": "Marketing (Fb, Insta, Youtube, Linkedin, Email)",
-        "Content": "SEO basics, Ads, Content writing, Canva designing",
-        "Analytics": "Website analytics"
-      },
-      color: "pink"
-    },
-    {
-      title: "Business Tools",
-      icon: <Settings className="w-6 h-6" />,
-      duration: "2-3 Months",
-      tools: {
-        "CRM": "CRM software (Zoho, HubSpot)",
-        "Management": "ERP basics, Project management tools (Trello, Asana, ClickUp)"
-      },
-      color: "slate"
-    },
-    {
-      title: "Data & Analytics",
-      icon: <BarChart className="w-6 h-6" />,
-      duration: "3-4 Months",
-      tools: {
-        "Excel": "Excel advanced (Pivot table, formulas)",
-        "Analysis": "Data entry automation, Business forecasting basics",
-        "Visualization": "Data visualization (Power BI)"
-      },
-      color: "indigo"
-    },
-    {
-      title: "Sales & Business Development",
-      icon: <TrendingUp className="w-6 h-6" />,
-      duration: "2-3 Months",
-      tools: {
-        "Lead Gen": "Lead generation tools",
-        "Sales Tools": "LinkedIn sales tools",
-        "Outreach": "Cold email tools"
-      },
-      color: "green"
-    },
-    {
-      title: "Corporate Skills",
-      icon: <UserCheck className="w-6 h-6" />,
-      duration: "2-3 Months",
-      tools: {
-        "Documentation": "Writing, Report making, Proposal creation",
-        "Communication": "Client communication, Technical presentation",
-        "Operations": "Operations management tools"
-      },
-      color: "orange"
-    }
-  ];
-
-  const packages = [
-    { name: "Mentorship", value: "One to One", icon: <User className="w-5 h-5" /> },
-    { name: "CRT", value: "Aptitude Test", icon: <GraduationCap className="w-5 h-5" /> },
-    { name: "Resume Building", value: "One to One", icon: <FileText className="w-5 h-5" /> },
-    { name: "Discipline", value: "One to One", icon: <Clock className="w-5 h-5" /> },
-    { name: "Personality Development", value: "One to One", icon: <Smile className="w-5 h-5" /> },
-    { name: "100% Placement Assistance", value: "One to One", icon: <Briefcase className="w-5 h-5" /> },
-    { name: "Class Type", value: "Online / Offline Test", icon: <CheckCircle className="w-5 h-5" /> },
-    { name: "Per Batch Size", value: "30 Students", icon: <Users className="w-5 h-5" /> },
-  ];
+  };
 
   return (
-    <div className="pt-20">
-      <Internships />
+    <section className="relative min-h-screen flex items-center bg-[#00256C] pt-24 pb-12 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3" />
+      </div>
 
-      <SectionWrapper background="light">
-        <Container>
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-blue-200 bg-white text-blue-700">
-              Our Programs
-            </Badge>
-            <h2 className="text-3xl font-bold font-display text-slate-900 mb-4">
-              Choose Your Internship Program
-            </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              Comprehensive training with hands-on experience in the latest technologies and management skills.
-            </p>
-          </div>
+      <Container className="relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Column: Content */}
+          <div className="text-left text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2 text-blue-200 text-sm font-medium mb-6"
+            >
+              <span>Home</span>
+              <span>/</span>
+              <span>Academy</span>
+              <span>/</span>
+              <span className="text-white">Courses</span>
+            </motion.div>
 
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-slate-800 mb-6 border-l-4 border-blue-600 pl-4">
-              For IT / Technical Students
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {techPrograms.map((program, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="h-full p-6 border-slate-200 hover:border-blue-300 transition-colors shadow-sm hover:shadow-md">
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-center gap-4">
-                        <div className={`p-3 rounded-xl bg-${program.color}-50 text-${program.color}-600`}>
-                          {program.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-extrabold text-blue-700 mb-1">{program.title}</h3>
-                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md inline-block">
-                            {program.duration}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8 min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
+              <div className="flex flex-col">
+                <div className="h-[1.2em] overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={courses[index]}
+                      initial={{ y: 40, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -40, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      className="block text-blue-400"
+                    >
+                      {courses[index]}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+                <span>Course by BN Intelhub</span>
+              </div>
+            </h1>
 
-                    <div className="space-y-4">
-                      <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Tools & Technologies</h4>
-                      <div className="grid gap-3">
-                        {Object.entries(program.tools).map(([key, value], i) => (
-                          <div key={i} className="flex gap-3 text-sm">
-                            <span className="font-medium text-slate-700 min-w-[100px]">{key}:</span>
-                            <span className="text-slate-600">{value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-bold text-slate-800 mb-6 border-l-4 border-pink-600 pl-4">
-              For BBA / MBA Students
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {managementPrograms.map((program, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="h-full p-6 border-slate-200 hover:border-pink-300 transition-colors shadow-sm hover:shadow-md">
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-center gap-4">
-                        <div className={`p-3 rounded-xl bg-${program.color}-50 text-${program.color}-600`}>
-                          {program.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-2xl font-extrabold text-pink-700 mb-1">{program.title}</h3>
-                          <span className="text-sm font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md inline-block">
-                            {program.duration}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <h4 className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Tools & Skills</h4>
-                      <div className="grid gap-3">
-                        {Object.entries(program.tools).map(([key, value], i) => (
-                          <div key={i} className="flex gap-3 text-sm">
-                            <span className="font-medium text-slate-700 min-w-[100px]">{key}:</span>
-                            <span className="text-slate-600">{value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </SectionWrapper>
-
-      <SectionWrapper background="white">
-        <Container>
-          <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-            
-            <div className="relative z-10">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold font-display mb-4">All-Inclusive Internship Package</h2>
-                <p className="text-slate-400 max-w-2xl mx-auto">
-                  Every internship program comes with our comprehensive support system to ensure your success.
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="space-y-6"
+            >
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                <p className="text-lg text-blue-50">
+                  Upskill in <strong className="text-white">Industry-Relevant Skills</strong> with our comprehensive curriculum
                 </p>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {packages.map((pkg, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-blue-500/50 transition-colors"
-                  >
-                    <div className="flex items-center gap-3 mb-3 text-blue-400">
-                      {pkg.icon}
-                      <h3 className="font-bold text-white">{pkg.name}</h3>
-                    </div>
-                    <p className="text-slate-300 text-sm font-medium pl-8 border-l-2 border-slate-700">
-                      {pkg.value}
-                    </p>
-                  </motion.div>
-                ))}
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                <p className="text-lg text-blue-50">
+                  Build <strong className="text-white">real-world projects</strong> by mastering in-demand technologies
+                </p>
               </div>
-            </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle2 className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
+                <p className="text-lg text-blue-50">
+                  Learn essential <strong className="text-white">concepts from scratch</strong> to advanced level
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </Container>
-      </SectionWrapper>
-    </div>
+
+          {/* Right Column: Form Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-white rounded-2xl p-6 md:p-8 shadow-2xl max-w-md mx-auto w-full"
+          >
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                Free Career Counselling is just a call away
+              </h3>
+              <p className="text-slate-500 text-sm">
+                Get guidance and clear your doubts.
+              </p>
+            </div>
+
+            <form className="space-y-5" onSubmit={handleSubmit}>
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Full Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your Full Name"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Email Id <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your Email ID"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+
+              {/* Graduation Year */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Graduation Year <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={gradYear}
+                  onChange={(e) => setGradYear(e.target.value)}
+                  placeholder="Year of Graduation"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+
+              {/* Job Title - Single Select */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Job Title <span className="text-red-500">*</span>
+                </label>
+
+                <div className="space-y-2">
+                  {["Student", "Working Professional", "Other"].map((item) => (
+                    <label key={item} className="flex items-center gap-2 text-slate-700">
+                      <input
+                        type="radio"
+                        name="jobTitle"
+                        value={item}
+                        checked={jobTitle === item}
+                        onChange={(e) => setJobTitle(e.target.value)}
+                        required
+                      />
+                      {item}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Mobile Number <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  placeholder="Enter your mobile number"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all placeholder:text-slate-400"
+                />
+              </div>
+
+              <button className="w-full bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold py-4 rounded-lg transition-colors shadow-lg shadow-red-900/20 text-lg">
+                Continue
+              </button>
+
+              <p className="text-xs text-slate-400 text-center leading-relaxed">
+                By creating an account I have read and agree to BN Intelhub's <a href="#" className="text-blue-600 hover:underline">Terms</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+              </p>
+            </form>
+          </motion.div>
+        </div>
+      </Container>
+    </section>
   );
 }

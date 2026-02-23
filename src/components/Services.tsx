@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { SERVICES } from '../constants';
 import { ArrowRight } from 'lucide-react';
@@ -7,6 +8,8 @@ import { Badge } from './ui/Badge';
 import { Card } from './ui/Cards';
 
 export default function Services() {
+  const navigate = useNavigate();
+
   return (
     <SectionWrapper id="services" background="default" className="relative">
       {/* Background decoration */}
@@ -29,7 +32,7 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {SERVICES.map((service, index) => (
+          {SERVICES.slice(0, 6).map((service, index) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
@@ -70,8 +73,14 @@ export default function Services() {
         </div>
 
         <div className="text-center">
-          <PrimaryButton className="px-8 py-4 text-lg bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200">
-            Request a Free Consultation
+          <PrimaryButton 
+            className="px-8 py-4 text-lg bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200"
+            onClick={() => {
+              navigate('/services');
+              window.scrollTo(0, 0);
+            }}
+          >
+            View All Services
           </PrimaryButton>
         </div>
       </Container>

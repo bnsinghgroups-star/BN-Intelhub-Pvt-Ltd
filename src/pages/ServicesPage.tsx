@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { SERVICES } from '../constants';
 import { ArrowRight, CheckCircle } from 'lucide-react';
@@ -5,10 +6,15 @@ import { SectionWrapper, Container } from '../components/ui/Layout';
 import { Badge } from '../components/ui/Badge';
 import { PrimaryButton } from '../components/ui/Buttons';
 import { Card } from '../components/ui/Cards';
+import ServiceEnquiryModal from '../components/ServiceEnquiryModal';
 
 export default function ServicesPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="pt-20">
+      <ServiceEnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       {/* Hero Section */}
       <section className="relative bg-slate-50 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -25,7 +31,11 @@ export default function ServicesPage() {
             <Badge variant="outline" className="mb-6 border-indigo-200 bg-white text-indigo-700">
               Our Services
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-slate-900 mb-6 leading-tight">
+            <h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-slate-900 mb-6 leading-tight cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => setIsModalOpen(true)}
+              title="Click to enquire"
+            >
               Comprehensive Digital <br />
               <span className="text-indigo-600">Solutions</span>
             </h1>
@@ -109,7 +119,7 @@ export default function ServicesPage() {
             </p>
             <PrimaryButton 
               className="px-8 py-4 text-lg bg-indigo-600 text-white hover:bg-indigo-700 border-none shadow-lg shadow-indigo-200"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => setIsModalOpen(true)}
             >
               Get a Quote
             </PrimaryButton>

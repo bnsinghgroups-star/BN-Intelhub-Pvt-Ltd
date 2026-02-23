@@ -143,7 +143,7 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} BN Intelhub Pvt Ltd. All rights reserved.</p>
           <div className="flex gap-6">
            <a
-  href="https://www.google.com/maps?q=23.355697200518126,85.35947142846608"
+  href="https://maps.app.goo.gl/XGpoPUUBM7SBPjtTA"
   target="_blank"
   rel="noopener noreferrer"
   className="hover:text-white"

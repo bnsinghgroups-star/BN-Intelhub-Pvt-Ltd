@@ -1,11 +1,19 @@
 import { motion } from 'motion/react';
-import { Calendar, Briefcase, Users, Award, CheckCircle, ArrowRight, Laptop, GraduationCap } from 'lucide-react';
+import { Calendar, Briefcase, Users, Award, Laptop, GraduationCap } from 'lucide-react';
 import { SectionWrapper, Container } from './ui/Layout';
 import { PrimaryButton } from './ui/Buttons';
 import { Badge } from './ui/Badge';
 import { Card } from './ui/Cards';
+import { useNavigate } from 'react-router-dom';
 
-export default function Internships() {
+interface InternshipsProps {
+  onEnrollClick?: () => void;
+}
+
+export default function Internships({ onEnrollClick }: InternshipsProps) {
+
+  const navigate = useNavigate();
+
   const features = [
     { icon: <Calendar className="w-5 h-5" />, text: "2 to 6 Months Duration" },
     { icon: <Laptop className="w-5 h-5" />, text: "Live Client-Based Projects" },
@@ -86,7 +94,6 @@ export default function Internships() {
 
         {/* Roadmap Timeline */}
         <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2 hidden md:block" />
           <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2 md:hidden" />
 
@@ -102,7 +109,6 @@ export default function Internships() {
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                {/* Content Side */}
                 <div className="flex-1 ml-12 md:ml-0">
                   <Card 
                     variant="glass"
@@ -111,36 +117,36 @@ export default function Internships() {
                     }`}
                     hoverEffect={true}
                   >
-                    <div className={`absolute top-6 ${
-                      index % 2 === 0 
-                        ? 'left-0 md:right-0 md:translate-x-1/2 -translate-x-1/2 md:-mr-1' 
-                        : 'left-0 md:left-0 md:-translate-x-1/2 -translate-x-1/2 md:-ml-1'
-                    } w-4 h-4 bg-white border-4 border-blue-500 rounded-full z-10 hidden md:block`} />
-                    
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
                     <p className="text-slate-600">{item.description}</p>
                   </Card>
                 </div>
 
-                {/* Center Icon */}
                 <div className="absolute left-4 md:left-1/2 -translate-x-1/2 flex items-center justify-center">
                   <div className={`w-12 h-12 rounded-full ${item.color} shadow-lg flex items-center justify-center z-20 border-4 border-white`}>
                     {item.icon}
                   </div>
                 </div>
 
-                {/* Empty Side for Balance */}
                 <div className="flex-1 hidden md:block" />
               </motion.div>
             ))}
           </div>
         </div>
 
+        {/* CTA Button */}
         <div className="mt-16 text-center">
-          <PrimaryButton className="px-8 py-4 text-lg shadow-xl shadow-blue-500/20">
+          <PrimaryButton 
+            onClick={() => {
+              navigate('/internships');
+              window.scrollTo(0, 0);
+            }}
+            className="px-8 py-4 text-lg shadow-xl shadow-blue-500/20"
+          >
             Start Your Internship Journey
           </PrimaryButton>
         </div>
+
       </Container>
     </SectionWrapper>
   );
