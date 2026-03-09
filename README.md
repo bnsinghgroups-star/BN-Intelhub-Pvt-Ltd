@@ -79,6 +79,3 @@ Ensure that your hosting platform is configured to **serve `index.html` for unkn
 - Contact form integrated with Google Forms
 - Route-based code splitting for faster initial load
 
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
