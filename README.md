@@ -78,4 +78,3 @@ Ensure that your hosting platform is configured to **serve `index.html` for unkn
 - Internship application modal integrated with Google Forms
 - Contact form integrated with Google Forms
 - Route-based code splitting for faster initial load
-
